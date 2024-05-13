@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<body>
+<h2> <b style="color:#a86662;"> Gadis Melayu Songs Collection </b> </h2>
+<p style="color:black;font-weight:bold;"> Update Song Details </p>
+
+<?php
+$Song_Id = $_POST["Song_Id"];
+
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "gadismelayu_db";
+
+$conn = new mysqli ($host,$user,$pass,$db);
+
+if ($conn->connect_error) {
+  die("Connection failed" . $conn->connect_error);
+}
+else 
+{
+$queryView = "SELECT * FROM SONG WHERE Song_Id = $Song_Id"; 
+$resultQ = $conn->query($queryView);
+    
+if ($resultQ->num_rows > 0){
+?>
+
+<?php
+while ($row=$resultQ->fetch_assoc()){
+$Status = $row["Status"];
+?>
+
+<?php
+}
+?>
+</table>
+<br><br>
+
+<?php
+$conn->close();
+}
+}
+?>
+</body>
+</center>
+</html>
+
+<?php
+session_start();
+if(isset($_SESSION["UID"])) {
+?>
+<?php
+}
+else
+{
+    echo "No session exists or session has expired. Please log in again.<br>";
+    echo "<a href=login.html> Login </a>";
+}
+?>
+
+<form name action 
